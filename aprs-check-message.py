@@ -7,9 +7,9 @@ from datetime import datetime, timezone
 
 
 # Přihlašovací údaje
-CALLSIGN = "OK1SIM" #prihlasovaci callsign
-PASSCODE = "17591" #passcode pro prihlaseni
-TARGET = "OK1SIM-15" #adresa na kterou prichazi zpravy
+CALLSIGN = "CALLSIGN" #prihlasovaci callsign
+PASSCODE = "12345" #passcode pro prihlaseni
+TARGET = "CALL-15" #adresa na kterou prichazi zpravy
 
 # Cesty k souborům
 CACHE_FILE = "processed_messages.json"
