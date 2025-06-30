@@ -2,6 +2,7 @@ import aprslib
 import requests
 import json
 import os
+import time
 from datetime import datetime, timezone
 
 
@@ -62,12 +63,19 @@ def handle_packet(packet):
             except Exception as e:
                 print(f"❌ Chyba při odesílání požadavku: {e}")
 
-def main():
-    ais = aprslib.IS(CALLSIGN, passwd=PASSCODE, host="rotate.aprs2.net", port=14580)
-    ais.set_filter("t/m")
-    ais.connect()
-    print(f"🔍 Sledování zpráv typu 'message' pro {TARGET} zahájeno...")
-    ais.consumer(callback=handle_packet, immortal=True)
+ef main():
+    while True:
+        try:
+            ais = aprslib.IS(CALLSIGN, passwd=PASSCODE, host="rotate.aprs2.net", port=14580)
+            ais.set_filter("t/m")
+            ais.connect()
+            print(f"🔍 Sledování zpráv typu 'message' pro {TARGET} zahájeno...")
+            ais.consumer(callback=handle_packet, immortal=True)
+        except Exception as e:
+            print(f"⚠️ Chyba: {e}")
+            print("🔁 Pokus o opětovné připojení za 10 sekund...")
+            time.sleep(10)
+
 
 if __name__ == "__main__":
     main()
